@@ -1,10 +1,11 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useDisclosure } from '@mantine/hooks'
 import { Button, Card, Group, Avatar, Text, Loader, Center, Alert, Modal, Stack, TextInput } from '@mantine/core'
 import { useForm, zodResolver } from '@mantine/form'
 import { useUser, useUpdateUser } from '../queries/users'
 import { z } from 'zod'
 import { notifications } from '@mantine/notifications'
+import { IconArrowLeft } from '@tabler/icons-react'
 
 const schema = z.object({
 	first_name: z.string().min(1, 'Обязательное поле'),
@@ -14,13 +15,13 @@ const schema = z.object({
 
 export default function UserDetailPage() {
 	const { id = '' } = useParams<{ id: string }>()
+	const navigate = useNavigate()
 	const { data, isLoading, isError } = useUser(id)
 	const [opened, { open, close }] = useDisclosure(false)
 	const mutation = useUpdateUser(id)
 
 	const form = useForm({
 		initialValues: { first_name: '', last_name: '', email: '' },
-		// @ts-expect-error - zodResolver type mismatch
 		validate: zodResolver(schema),
 	})
 
@@ -40,6 +41,14 @@ export default function UserDetailPage() {
 
 	return (
 		<>
+			<Button
+				variant="subtle"
+				leftSection={<IconArrowLeft size={18} />}
+				mb="md"
+				onClick={() => navigate(-1)}
+			>
+				Назад
+			</Button>
 			<Card withBorder>
 				<Group>
 					<Avatar src={user.avatar} radius="xl" size={72} />

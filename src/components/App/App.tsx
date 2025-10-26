@@ -1,7 +1,7 @@
 import { AppShell, Container } from '@mantine/core'
 import { Route, Routes, Navigate } from 'react-router-dom'
-import UsersPage from './pages/UsersPage'
-import UserDetailPage from './pages/UserDetailPage'
+import UsersPage from '../../pages/UsersPage'
+import UserDetailPage from '../../pages/UserDetailPage'
 
 function App() {
   return (

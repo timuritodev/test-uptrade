@@ -8,7 +8,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { BrowserRouter } from 'react-router-dom'
 import '@mantine/core/styles.css'
 import '@mantine/notifications/styles.css'
-import App from './App.tsx'
+import App from './components/App/App'
 
 const queryClient = new QueryClient()
 
