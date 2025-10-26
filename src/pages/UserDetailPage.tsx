@@ -20,6 +20,7 @@ export default function UserDetailPage() {
 
 	const form = useForm({
 		initialValues: { first_name: '', last_name: '', email: '' },
+		// @ts-expect-error - zodResolver type mismatch
 		validate: zodResolver(schema),
 	})
 
@@ -65,7 +66,7 @@ export default function UserDetailPage() {
 							await mutation.mutateAsync(values)
 							notifications.show({ color: 'green', message: 'Данные обновлены' })
 							close()
-						} catch (e) {
+						} catch {
 							notifications.show({ color: 'red', message: 'Ошибка при сохранении' })
 						}
 					})}

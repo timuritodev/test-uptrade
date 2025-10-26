@@ -6,7 +6,7 @@ export function useUsers(page: number) {
 		queryKey: ['users', page],
 		queryFn: () => fetchUsers(page),
 		staleTime: 60_000,
-		keepPreviousData: true,
+		placeholderData: (previousData) => previousData,
 	})
 }
 
